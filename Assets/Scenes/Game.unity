@@ -155,10 +155,12 @@ MonoBehaviour:
   prefab: {fileID: 5957586926409042680, guid: 7bb07e482cfc57148941d8398eaf58c9, type: 3}
   spawnPos:
   - 0
-  - 7
-  - -7
+  - 7.5
+  - -7.5
   maxTime: 2
   minTime: 4
+  weaponsList: []
+  canSpawn: 1
 --- !u!4 &26700715
 Transform:
   m_ObjectHideFlags: 0
