@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class playerscript : MonoBehaviour
+public class playerScript : MonoBehaviour
 {
     [Header("Velocidade")]
     [SerializeField]
@@ -28,15 +28,6 @@ public class playerscript : MonoBehaviour
     private float coyoteTime = 0.2f;
     private float coyoteCounter = 0f;
 
-    [Header("Armas")]
-    [SerializeField]
-    private bool canPickWeapon = false;
-    [SerializeField]
-    private GameObject weapon;
-    [SerializeField]
-    [Range(0f, 100f)]
-    private float throwForce;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -49,12 +40,10 @@ public class playerscript : MonoBehaviour
         if (rb.velocity.x > 0f)
         {
             transform.localScale = new Vector3(0.7f, transform.localScale.y, transform.localScale.z);
-            throwForce = Mathf.Abs(throwForce);
         }
         else if (rb.velocity.x < 0f)
         {
             transform.localScale = new Vector3(-0.7f, transform.localScale.y, transform.localScale.z);
-            throwForce = Mathf.Abs(throwForce) * (-1);
         }
     }
 
@@ -99,56 +88,6 @@ public class playerscript : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             jumpsRemaining--;
             coyoteCounter = 0f;
-        }
-    }
-
-    public void Weapon(InputAction.CallbackContext value)
-    {
-        if (value.performed)
-        {
-            if (canPickWeapon)
-            {
-                weapon.transform.GetComponent<Rigidbody2D>().isKinematic = true;
-                weapon.transform.SetParent(gameObject.transform);
-                Destroy(weapon.transform.GetChild(0).gameObject);
-                weapon.transform.localPosition = new Vector3(0.7f, 0f, weapon.transform.localPosition.z);
-                if (weapon.GetComponent<BoxCollider2D>().isTrigger)
-                {
-                    weapon.GetComponent<BoxCollider2D>().enabled = false;
-                }
-            }
-            else if (transform.childCount > 1)
-            {
-                Rigidbody2D wpRB;
-                weapon = transform.GetChild(1).gameObject;
-                wpRB = weapon.transform.GetComponent<Rigidbody2D>();
-                weapon.transform.parent = null;
-                wpRB.isKinematic = false;
-                if (weapon.GetComponent<BoxCollider2D>().isTrigger)
-                {
-                    weapon.GetComponent<BoxCollider2D>().enabled = true;
-                }
-                wpRB.gravityScale = 0f;
-                wpRB.velocity = new Vector2(throwForce, wpRB.velocity.y);
-            }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("weapon"))
-        {
-            canPickWeapon = true;
-            weapon = collision.gameObject;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("weapon"))
-        {
-            canPickWeapon = false;
-            weapon = null;
         }
     }
 

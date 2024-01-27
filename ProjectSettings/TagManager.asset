@@ -6,6 +6,7 @@ TagManager:
   tags:
   - weapon
   - ground
+  - void
   layers:
   - Default
   - TransparentFX
