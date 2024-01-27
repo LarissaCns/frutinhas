@@ -28,11 +28,14 @@ public class playerscript : MonoBehaviour
     private float coyoteTime = 0.2f;
     private float coyoteCounter = 0f;
 
-    //armas
+    [Header("Armas")]
     [SerializeField]
     private bool canPickWeapon = false;
     [SerializeField]
     private GameObject weapon;
+    [SerializeField]
+    [Range(0f, 100f)]
+    private float throwForce;
 
     private void Awake()
     {
@@ -103,7 +106,9 @@ public class playerscript : MonoBehaviour
         {
             if (canPickWeapon)
             {
+                weapon.transform.GetComponent<Rigidbody2D>().isKinematic = true;
                 weapon.transform.SetParent(gameObject.transform);
+                Destroy(weapon.transform.GetChild(0).gameObject);
                 weapon.transform.localPosition = new Vector3(0.7f, 0f, weapon.transform.localPosition.z);
                 if (weapon.GetComponent<BoxCollider2D>().isTrigger)
                 {
@@ -112,9 +117,17 @@ public class playerscript : MonoBehaviour
             }
             else if (transform.childCount > 1)
             {
-
-                transform.GetChild(1).transform.parent = null;
-
+                Rigidbody2D wpRB;
+                weapon = transform.GetChild(1).gameObject;
+                wpRB = weapon.transform.GetComponent<Rigidbody2D>();
+                weapon.transform.parent = null;
+                wpRB.isKinematic = false;
+                if (weapon.GetComponent<BoxCollider2D>().isTrigger)
+                {
+                    weapon.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                wpRB.gravityScale = 0f;
+                wpRB.velocity = new Vector2(throwForce, wpRB.velocity.y);
             }
         }
     }
