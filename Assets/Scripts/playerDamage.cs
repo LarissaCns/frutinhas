@@ -11,12 +11,15 @@ public class playerDamage : MonoBehaviour
 
     [Header("Armas")]
     [SerializeField]
-    private bool canPickWeapon = false;
-    [SerializeField]
     private GameObject weapon;
     [SerializeField]
     [Range(0f, 100f)]
     private float throwForce;
+
+    //teleguiada
+    [SerializeField]
+    private Transform target;
+    private weaponScript weaponInfo;
 
     [Header("Vidas")]
     private int lives = 4;
@@ -44,18 +47,16 @@ public class playerDamage : MonoBehaviour
     {
         if (value.performed)
         {
-            if (canPickWeapon)
+            if (weaponInfo.canPickWeapon && transform.childCount <= 1)
             {
+                weapon = weaponInfo.gameObject;
                 weapon.transform.GetComponent<Rigidbody2D>().isKinematic = true;
                 weapon.transform.SetParent(gameObject.transform);
                 if (weapon.transform.childCount > 0) {
                     Destroy(weapon.transform.GetChild(0).gameObject);
                 }
                 weapon.transform.localPosition = new Vector3(0.7f, 0f, weapon.transform.localPosition.z);
-                if (weapon.GetComponent<BoxCollider2D>().isTrigger)
-                {
-                    weapon.GetComponent<BoxCollider2D>().enabled = false;
-                }
+                weapon.GetComponent<BoxCollider2D>().enabled = false;
             }
             else if (transform.childCount > 1)
             {
@@ -64,12 +65,13 @@ public class playerDamage : MonoBehaviour
                 wpRB = weapon.transform.GetComponent<Rigidbody2D>();
                 weapon.transform.parent = null;
                 wpRB.isKinematic = false;
-                if (weapon.GetComponent<BoxCollider2D>().isTrigger)
-                {
-                    weapon.GetComponent<BoxCollider2D>().enabled = true;
-                }
+                weapon.GetComponent<BoxCollider2D>().enabled = true;
+
                 wpRB.gravityScale = 0f;
-                wpRB.velocity = new Vector2(throwForce, wpRB.velocity.y);
+
+                wpRB.velocity = Vector2.right * throwForce;
+
+                StartCoroutine(Verify());
             }
         }
     }
@@ -82,11 +84,6 @@ public class playerDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("weapon"))
-        {
-            canPickWeapon = true;
-            weapon = collision.gameObject;
-        }
         if (collision.CompareTag("void"))
         {
             LivesUI();
@@ -96,14 +93,9 @@ public class playerDamage : MonoBehaviour
                 StartCoroutine(Respawn());
             }
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
         if (collision.CompareTag("weapon"))
         {
-            canPickWeapon = false;
-            weapon = null;
+            weaponInfo = collision.gameObject.GetComponent<weaponScript>();
         }
     }
 
@@ -115,5 +107,31 @@ public class playerDamage : MonoBehaviour
             Destroy(transform.GetChild(1).gameObject);
         }
         transform.position = spawnPoint;
+    }
+
+    IEnumerator Verify()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        Collider2D[] weaponCollider = Physics2D.OverlapCircleAll((Vector2)transform.position, 0.3f);
+
+        if (weaponCollider != null)
+        {
+            foreach (Collider2D collider in weaponCollider)
+            {
+                if (collider.gameObject.CompareTag("weapon"))
+                {
+                    weapon = collider.gameObject;
+                    weapon.transform.GetComponent<Rigidbody2D>().isKinematic = true;
+                    weapon.transform.SetParent(gameObject.transform);
+                    if (weapon.transform.childCount > 0)
+                    {
+                        Destroy(weapon.transform.GetChild(0).gameObject);
+                    }
+                    weapon.transform.localPosition = new Vector3(0.7f, 0f, weapon.transform.localPosition.z);
+                    weapon.GetComponent<BoxCollider2D>().enabled = false;
+                }
+            }
+        }
     }
 }
