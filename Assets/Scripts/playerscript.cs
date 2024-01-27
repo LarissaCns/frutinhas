@@ -49,10 +49,12 @@ public class playerscript : MonoBehaviour
         if (rb.velocity.x > 0f)
         {
             transform.localScale = new Vector3(0.7f, transform.localScale.y, transform.localScale.z);
+            throwForce = Mathf.Abs(throwForce);
         }
         else if (rb.velocity.x < 0f)
         {
             transform.localScale = new Vector3(-0.7f, transform.localScale.y, transform.localScale.z);
+            throwForce = Mathf.Abs(throwForce) * (-1);
         }
     }
 
@@ -155,5 +157,4 @@ public class playerscript : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(feet.position, feetSize);
     }*/
-
 }
