@@ -1,3 +1,2 @@
-### Game made by Code Sirens 💙
+## Game made by Code Sirens in Global Game Jam 2024 💙
 
-## Made in Global Game Jam 2024
