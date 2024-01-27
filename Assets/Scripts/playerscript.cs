@@ -22,6 +22,11 @@ public class playerscript : MonoBehaviour
     private Vector2 feetSize = new Vector2(0.5f,0.5f);
     [SerializeField]
     private LayerMask groundLayer;
+    private int maxJumps = 2;
+    private int jumpsRemaining = 0;
+
+    private float coyoteTime = 0.2f;
+    private float coyoteCounter = 0f;
 
     private void Awake()
     {
@@ -34,9 +39,17 @@ public class playerscript : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext value)
     {
-        if (isGrounded())
+        if ((jumpsRemaining > 0 || coyoteCounter> 0f) && value.performed)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpsRemaining--;
+        }
+
+        else if (value.canceled && rb.velocity.y > 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            jumpsRemaining--;
+            coyoteCounter = 0f;
         }
     }
 
@@ -45,10 +58,23 @@ public class playerscript : MonoBehaviour
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
     }
 
+    private void Update()
+    {
+        if (isGrounded())
+        {
+            coyoteCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteCounter -= Time.deltaTime;
+        }
+    }
+
     private bool isGrounded()
     {
         if(Physics2D.OverlapBox(feet.position, feetSize, 0, groundLayer))
         {
+            jumpsRemaining = maxJumps;
             return true;
         }
 
