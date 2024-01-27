@@ -320,7 +320,19 @@ MonoBehaviour:
     m_ActionId: 7ebddc8f-6bcf-4d5b-a00b-f7b57d801aec
     m_ActionName: PlayerMap/Move
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 54865623}
+        m_TargetAssemblyTypeName: playerscript, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b1d4dfdf-9bca-469e-8265-b4393912515d
     m_ActionName: PlayerMap/Jump
   - m_PersistentCalls:

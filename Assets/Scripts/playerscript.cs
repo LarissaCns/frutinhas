@@ -34,12 +34,25 @@ public class playerscript : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext value)
     {
-
+        if (isGrounded())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
     }
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
+    }
+
+    private bool isGrounded()
+    {
+        if(Physics2D.OverlapBox(feet.position, feetSize, 0, groundLayer))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void OnDrawGizmos()
