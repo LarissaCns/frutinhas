@@ -29,7 +29,6 @@ public class playerScript : MonoBehaviour
     private float coyoteTime = 0.2f;
     private float coyoteCounter = 0f;
 
-    // Tentando o dash
     private bool canDash = true; // posso dar o dash
     private bool isDashing; // dash ativo
     private float dashingPower = 24f; // força do dash
