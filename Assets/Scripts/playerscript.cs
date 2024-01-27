@@ -7,7 +7,7 @@ public class playerscript : MonoBehaviour
 {
     [Header("Velocidade")]
     [SerializeField]
-    [Range(0f,100f)]
+    [Range(0f, 100f)]
     private float speed;
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -19,7 +19,7 @@ public class playerscript : MonoBehaviour
     [SerializeField]
     private Transform feet;
     [SerializeField]
-    private Vector2 feetSize = new Vector2(0.5f,0.5f);
+    private Vector2 feetSize = new Vector2(0.5f, 0.5f);
     [SerializeField]
     private LayerMask groundLayer;
     private int maxJumps = 2;
@@ -43,11 +43,11 @@ public class playerscript : MonoBehaviour
     {
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
 
-        if(rb.velocity.x > 0f)
+        if (rb.velocity.x > 0f)
         {
             transform.localScale = new Vector3(0.7f, transform.localScale.y, transform.localScale.z);
         }
-        else if(rb.velocity.x < 0f)
+        else if (rb.velocity.x < 0f)
         {
             transform.localScale = new Vector3(-0.7f, transform.localScale.y, transform.localScale.z);
         }
@@ -67,7 +67,7 @@ public class playerscript : MonoBehaviour
 
     private bool isGrounded()
     {
-        if(Physics2D.OverlapBox(feet.position, feetSize, 0, groundLayer))
+        if (Physics2D.OverlapBox(feet.position, feetSize, 0, groundLayer))
         {
             jumpsRemaining = maxJumps;
             return true;
@@ -99,10 +99,23 @@ public class playerscript : MonoBehaviour
 
     public void Weapon(InputAction.CallbackContext value)
     {
-        if (canPickWeapon)
+        if (value.performed)
         {
-            weapon.transform.SetParent(gameObject.transform);
-            weapon.transform.localPosition = new Vector3(0.7f, 0f, weapon.transform.localPosition.z);
+            if (canPickWeapon)
+            {
+                weapon.transform.SetParent(gameObject.transform);
+                weapon.transform.localPosition = new Vector3(0.7f, 0f, weapon.transform.localPosition.z);
+                if (weapon.GetComponent<BoxCollider2D>().isTrigger)
+                {
+                    weapon.GetComponent<BoxCollider2D>().enabled = false;
+                }
+            }
+            else if (transform.childCount > 1)
+            {
+
+                transform.GetChild(1).transform.parent = null;
+
+            }
         }
     }
 
