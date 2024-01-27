@@ -278,6 +278,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  bufferTime: 0.2
+  bufferCounter: 0
+  count: 0
 --- !u!114 &54865624
 MonoBehaviour:
   m_ObjectHideFlags: 0
