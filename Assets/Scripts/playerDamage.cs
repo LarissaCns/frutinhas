@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class playerDamage : MonoBehaviour
@@ -17,6 +18,11 @@ public class playerDamage : MonoBehaviour
     [Range(0f, 100f)]
     private float throwForce;
 
+    [Header("Vidas")]
+    private int lives = 4;
+    [SerializeField]
+    private Image[] livesImage;
+
     private void Update()
     {
         if(transform.localScale.x > 0)
@@ -26,6 +32,11 @@ public class playerDamage : MonoBehaviour
         else if (transform.localScale.x < 0)
         {
             throwForce = Mathf.Abs(throwForce) * (-1);
+        }
+
+        if (!livesImage[0].enabled)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -63,6 +74,12 @@ public class playerDamage : MonoBehaviour
         }
     }
 
+    public void LivesUI()
+    {
+        livesImage[lives].enabled = false;
+        lives--;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("weapon"))
@@ -72,7 +89,12 @@ public class playerDamage : MonoBehaviour
         }
         if (collision.CompareTag("void"))
         {
-            StartCoroutine(Respawn());
+            LivesUI();
+
+            if (lives >= 0)
+            {
+                StartCoroutine(Respawn());
+            }
         }
     }
 
