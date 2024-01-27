@@ -91,7 +91,11 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""2D Vector"",
+<<<<<<< HEAD
                     ""id"": ""61b25b3e-0377-46bd-b1e6-98bdc6e8a668"",
+=======
+                    ""id"": ""d493441d-fb9e-4f03-aea2-b025b508b9a8"",
+>>>>>>> 65cfa3c31a02f3c74699d09c28f67c548859d40f
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -102,7 +106,11 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""left"",
+<<<<<<< HEAD
                     ""id"": ""b44b20d4-0832-4f72-91b7-60095fffda81"",
+=======
+                    ""id"": ""9e627fca-f3f8-4935-8daa-114e1cd0bf98"",
+>>>>>>> 65cfa3c31a02f3c74699d09c28f67c548859d40f
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -113,7 +121,11 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""right"",
+<<<<<<< HEAD
                     ""id"": ""02078e5e-9f90-41cc-9c35-37ab5c894adb"",
+=======
+                    ""id"": ""0c7de26c-0001-4f8b-b423-dc34359a8833"",
+>>>>>>> 65cfa3c31a02f3c74699d09c28f67c548859d40f
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
