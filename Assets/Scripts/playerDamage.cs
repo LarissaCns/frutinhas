@@ -24,7 +24,34 @@ public class playerDamage : MonoBehaviour
     [Header("Vidas")]
     private int lives = 4;
     [SerializeField]
-    private Image[] livesImage;
+    public Image[] livesImage;
+    public GameObject livesArray;
+
+    private void Awake()
+    {
+        if (PlayerInput.GetPlayerByIndex(0).gameObject == gameObject)
+        {
+           spawnPoint = new Vector2(-4.06f, -2.978364f);
+           livesArray = GameObject.Find("LivesP1");
+           
+            for (int i = 0; i < livesArray.transform.childCount; i++)
+            {
+                livesImage[i] = livesArray.transform.GetChild(i).GetComponent<Image>();
+            }
+        }
+        else if (PlayerInput.GetPlayerByIndex(1).gameObject == gameObject)
+        {
+            livesArray = GameObject.Find("LivesP2");
+            spawnPoint = new Vector2(4.06f, -2.978364f);
+
+            for (int i = 0; i < livesArray.transform.childCount; i++)
+            {
+                livesImage[i] = livesArray.transform.GetChild(i).GetComponent<Image>();
+            }
+        }
+
+        transform.position = spawnPoint;
+    }
 
     private void Update()
     {
@@ -45,9 +72,9 @@ public class playerDamage : MonoBehaviour
 
     public void Weapon(InputAction.CallbackContext value)
     {
-        if (value.performed)
+        if (value.performed && Time.timeScale == 1)
         {
-            if (weaponInfo.canPickWeapon && transform.childCount <= 1)
+            if (weaponInfo != null && weaponInfo.canPickWeapon && transform.childCount <= 1)
             {
                 weapon = weaponInfo.gameObject;
                 weapon.transform.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -63,6 +90,7 @@ public class playerDamage : MonoBehaviour
                 Rigidbody2D wpRB;
                 weapon = transform.GetChild(1).gameObject;
                 wpRB = weapon.transform.GetComponent<Rigidbody2D>();
+                weaponInfo.playerThrowed = gameObject;
                 weapon.transform.parent = null;
                 wpRB.isKinematic = false;
                 weapon.GetComponent<BoxCollider2D>().enabled = true;
@@ -96,6 +124,15 @@ public class playerDamage : MonoBehaviour
         if (collision.CompareTag("weapon"))
         {
             weaponInfo = collision.gameObject.GetComponent<weaponScript>();
+
+            if (weaponInfo.playerThrowed != gameObject)
+            {
+                if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.x != 0)
+                {
+                    LivesUI();
+                    Destroy(collision.gameObject);
+                }
+            }
         }
     }
 
