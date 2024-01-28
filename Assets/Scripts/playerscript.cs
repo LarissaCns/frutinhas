@@ -29,9 +29,15 @@ public class playerScript : MonoBehaviour
     private float coyoteTime = 0.2f;
     private float coyoteCounter = 0f;
 
+<<<<<<< Updated upstream
     private bool canDash = true; // posso dar o dash
     private bool isDashing; // dash ativo
     private float dashingPower = 24f; // força do dash
+=======
+    public bool canDash = true; // posso dar o dash
+    public bool isDashing = false; // dash ativo
+    private float dashingPower = 24f; // for�a do dash
+>>>>>>> Stashed changes
     private float dashingTime = 0.2f; // tempo do dash
     private float dashingCoolDown = 0.5f;
 
@@ -53,11 +59,11 @@ public class playerScript : MonoBehaviour
 
         if (rb.velocity.x > 0f)
         {
-            transform.localScale = new Vector3(0.7f, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
         else if (rb.velocity.x < 0f)
         {
-            transform.localScale = new Vector3(-0.7f, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x * -1), transform.localScale.y, transform.localScale.z);
         }
     }
 
