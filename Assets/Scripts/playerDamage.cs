@@ -72,7 +72,7 @@ public class playerDamage : MonoBehaviour
 
     public void Weapon(InputAction.CallbackContext value)
     {
-        if (value.performed)
+        if (value.performed && Time.timeScale == 1)
         {
             if (weaponInfo != null && weaponInfo.canPickWeapon && transform.childCount <= 1)
             {
@@ -130,6 +130,7 @@ public class playerDamage : MonoBehaviour
                 if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.x != 0)
                 {
                     LivesUI();
+                    Destroy(collision.gameObject);
                 }
             }
         }

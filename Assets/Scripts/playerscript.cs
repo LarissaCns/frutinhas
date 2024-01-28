@@ -36,11 +36,13 @@ public class playerScript : MonoBehaviour
 
     [SerializeField] TrailRenderer tr;
 
+    private questionsManager questionInfo;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         tr.emitting = false;
+        questionInfo = GameObject.Find("QuestionsManager").GetComponent<questionsManager>();
     }
 
     private void FixedUpdate()
@@ -64,16 +66,6 @@ public class playerScript : MonoBehaviour
 
     private void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
-
-        if (Input.GetButtonDown("Fire2") && canDash)
-        {
-            StartCoroutine(Dash());
-        }
-
         if (isGrounded())
         {
             coyoteCounter = coyoteTime;
@@ -84,7 +76,7 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    IEnumerator Dash()
+    IEnumerator DashMove()
     {
         canDash = false;
         isDashing = true;
@@ -113,21 +105,103 @@ public class playerScript : MonoBehaviour
     public void Move(InputAction.CallbackContext value)
     {
         moveInput = value.ReadValue<Vector2>();
+
+        if (Time.timeScale == 0)
+        {
+            if (PlayerInput.GetPlayerByIndex(0).gameObject == gameObject)
+            {
+                if (!questionInfo.p1Chose)
+                {
+                    if (moveInput.x > 0f)
+                    {
+                        questionInfo.p1Icons[1].enabled = true;
+                        questionInfo.p1Icons[0].enabled = false;
+                        questionInfo.p1Choice = 1;
+                    }
+                    else if (moveInput.x < 0f)
+                    {
+                        questionInfo.p1Icons[0].enabled = true;
+                        questionInfo.p1Icons[1].enabled = false;
+                        questionInfo.p1Choice = 0;
+                    }
+                }
+            }
+            else
+            {
+                if (!questionInfo.p2Chose)
+                {
+                    if (moveInput.x > 0f)
+                    {
+                        questionInfo.p2Icons[1].enabled = true;
+                        questionInfo.p2Icons[0].enabled = false;
+                        questionInfo.p2Choice = 1;
+                    }
+                    else if (moveInput.x < 0f)
+                    {
+                        questionInfo.p2Icons[0].enabled = true;
+                        questionInfo.p2Icons[1].enabled = false;
+                        questionInfo.p2Choice = 0;
+                    }
+                }
+            }
+        }
     }
 
     public void Jump(InputAction.CallbackContext value)
     {
-        if ((jumpsRemaining > 0 || coyoteCounter > 0f) && value.performed)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpsRemaining--;
-        }
 
-        else if (value.canceled && rb.velocity.y > 0)
+        if (Time.timeScale == 1)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            jumpsRemaining--;
-            coyoteCounter = 0f;
+            if ((jumpsRemaining > 0 || coyoteCounter > 0f) && value.performed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jumpsRemaining--;
+            }
+
+            else if (value.canceled && rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+                jumpsRemaining--;
+                coyoteCounter = 0f;
+            }
+        }
+        else
+        {
+            if (PlayerInput.GetPlayerByIndex(0).gameObject == gameObject)
+            {
+                questionInfo.p1Icons[questionInfo.p1Choice].color = Color.green;
+                questionInfo.p1Chose = true;
+            }
+            else
+            {
+                questionInfo.p2Icons[questionInfo.p2Choice].color = Color.green;
+                questionInfo.p2Chose = true;
+            }
+        }
+    }
+
+    public void Dash(InputAction.CallbackContext value)
+    {
+        if (Time.timeScale == 0)
+        {
+            if (PlayerInput.GetPlayerByIndex(0).gameObject == gameObject)
+            {
+                questionInfo.p1Icons[questionInfo.p1Choice].color = Color.white;
+                questionInfo.p1Chose = false;
+            }
+            else
+            {
+                questionInfo.p2Icons[questionInfo.p2Choice].color = Color.white;
+                questionInfo.p2Chose = false;
+            }
+
+        }
+        else
+        {
+            if (canDash)
+            {
+                StartCoroutine(DashMove());
+            }
         }
     }
 

@@ -211,6 +211,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3fe8ec53-b4b9-400a-a536-39acec6546a3
     m_ActionName: PlayerMap/Weapon[/XInputControllerWindows/buttonWest,/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7817918736526843721}
+        m_TargetAssemblyTypeName: playerScript, Assembly-CSharp
+        m_MethodName: Dash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 05a8581b-bf67-4852-b8d7-c35cb48c897e
+    m_ActionName: PlayerMap/Dash[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMap
@@ -260,6 +276,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  livesArray: {fileID: 0}
 --- !u!96 &7817918736526843716
 TrailRenderer:
   serializedVersion: 2

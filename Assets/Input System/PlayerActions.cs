@@ -53,6 +53,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""05a8581b-bf67-4852-b8d7-c35cb48c897e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +174,28 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91ad2a1f-c75b-4d7d-bb9f-0d383ee0045e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db09a20c-8567-4851-bc98-dd9bd6a6d4c0"",
+                    ""path"": ""<Keyboard>/slash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -176,6 +207,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_PlayerMap_Move = m_PlayerMap.FindAction("Move", throwIfNotFound: true);
         m_PlayerMap_Jump = m_PlayerMap.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMap_Weapon = m_PlayerMap.FindAction("Weapon", throwIfNotFound: true);
+        m_PlayerMap_Dash = m_PlayerMap.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,6 +270,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_Move;
     private readonly InputAction m_PlayerMap_Jump;
     private readonly InputAction m_PlayerMap_Weapon;
+    private readonly InputAction m_PlayerMap_Dash;
     public struct PlayerMapActions
     {
         private @PlayerActions m_Wrapper;
@@ -245,6 +278,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerMap_Move;
         public InputAction @Jump => m_Wrapper.m_PlayerMap_Jump;
         public InputAction @Weapon => m_Wrapper.m_PlayerMap_Weapon;
+        public InputAction @Dash => m_Wrapper.m_PlayerMap_Dash;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -263,6 +297,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Weapon.started -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnWeapon;
                 @Weapon.performed -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnWeapon;
                 @Weapon.canceled -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnWeapon;
+                @Dash.started -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_PlayerMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -276,6 +313,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Weapon.started += instance.OnWeapon;
                 @Weapon.performed += instance.OnWeapon;
                 @Weapon.canceled += instance.OnWeapon;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -285,5 +325,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnWeapon(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
