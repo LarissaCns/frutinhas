@@ -12,7 +12,6 @@ public class playerScript : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
-
     [Header("Pulo")]
     [SerializeField]
     [Range(0f, 100f)]
