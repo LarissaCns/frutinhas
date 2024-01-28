@@ -37,7 +37,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Jump/Confirm"",
                     ""type"": ""Button"",
                     ""id"": ""674dd7ca-cd21-4fec-9132-076d8fdd725b"",
                     ""expectedControlType"": ""Button"",
@@ -62,6 +62,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Value"",
+                    ""id"": ""9c503253-87d5-427c-8de5-e57cbdc8e2de"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -72,7 +81,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Jump/Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -83,7 +92,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Jump/Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -196,6 +205,116 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""ea2527ae-554b-4b15-91ac-224fcb49594f"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""0b4759d6-f0c6-4791-b9a7-e22b939cbec4"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""62485f8f-add7-42a0-9250-7a6136978db8"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""ff21d0e2-2feb-4763-9915-e5fb05795c02"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1e4b2d96-c058-43e3-acfd-845691e5a19c"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""e5e1c8c5-4b25-4139-ac06-6beae8dd2221"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e4349a8e-6866-4ac7-8183-e3e8460ea89d"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""340a9999-272b-48ae-baa5-253dc56f3d7a"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""c5ab746a-3af8-4511-90f4-be9495fea666"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a9e9c989-e12d-4325-ac38-29a6005b9756"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -205,9 +324,10 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         // PlayerMap
         m_PlayerMap = asset.FindActionMap("PlayerMap", throwIfNotFound: true);
         m_PlayerMap_Move = m_PlayerMap.FindAction("Move", throwIfNotFound: true);
-        m_PlayerMap_Jump = m_PlayerMap.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerMap_JumpConfirm = m_PlayerMap.FindAction("Jump/Confirm", throwIfNotFound: true);
         m_PlayerMap_Weapon = m_PlayerMap.FindAction("Weapon", throwIfNotFound: true);
         m_PlayerMap_Dash = m_PlayerMap.FindAction("Dash", throwIfNotFound: true);
+        m_PlayerMap_Select = m_PlayerMap.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -268,17 +388,19 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerMap;
     private IPlayerMapActions m_PlayerMapActionsCallbackInterface;
     private readonly InputAction m_PlayerMap_Move;
-    private readonly InputAction m_PlayerMap_Jump;
+    private readonly InputAction m_PlayerMap_JumpConfirm;
     private readonly InputAction m_PlayerMap_Weapon;
     private readonly InputAction m_PlayerMap_Dash;
+    private readonly InputAction m_PlayerMap_Select;
     public struct PlayerMapActions
     {
         private @PlayerActions m_Wrapper;
         public PlayerMapActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerMap_Move;
-        public InputAction @Jump => m_Wrapper.m_PlayerMap_Jump;
+        public InputAction @JumpConfirm => m_Wrapper.m_PlayerMap_JumpConfirm;
         public InputAction @Weapon => m_Wrapper.m_PlayerMap_Weapon;
         public InputAction @Dash => m_Wrapper.m_PlayerMap_Dash;
+        public InputAction @Select => m_Wrapper.m_PlayerMap_Select;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -291,15 +413,18 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnMove;
-                @Jump.started -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnJump;
+                @JumpConfirm.started -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnJumpConfirm;
+                @JumpConfirm.performed -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnJumpConfirm;
+                @JumpConfirm.canceled -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnJumpConfirm;
                 @Weapon.started -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnWeapon;
                 @Weapon.performed -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnWeapon;
                 @Weapon.canceled -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnWeapon;
                 @Dash.started -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnDash;
+                @Select.started -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_PlayerMapActionsCallbackInterface.OnSelect;
             }
             m_Wrapper.m_PlayerMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -307,15 +432,18 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
+                @JumpConfirm.started += instance.OnJumpConfirm;
+                @JumpConfirm.performed += instance.OnJumpConfirm;
+                @JumpConfirm.canceled += instance.OnJumpConfirm;
                 @Weapon.started += instance.OnWeapon;
                 @Weapon.performed += instance.OnWeapon;
                 @Weapon.canceled += instance.OnWeapon;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
             }
         }
     }
@@ -323,8 +451,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     public interface IPlayerMapActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
+        void OnJumpConfirm(InputAction.CallbackContext context);
         void OnWeapon(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

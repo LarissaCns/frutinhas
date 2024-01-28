@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7817918736526843721}
   - component: {fileID: 7817918736526843719}
   - component: {fileID: 7817918736526843716}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -227,6 +227,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 05a8581b-bf67-4852-b8d7-c35cb48c897e
     m_ActionName: PlayerMap/Dash[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9c503253-87d5-427c-8de5-e57cbdc8e2de
+    m_ActionName: PlayerMap/Select[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMap

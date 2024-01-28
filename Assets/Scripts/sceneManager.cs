@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class sceneManager : MonoBehaviour
 {
-
     public void LoadScene(int index)
     {
         SceneManager.LoadScene(index);
