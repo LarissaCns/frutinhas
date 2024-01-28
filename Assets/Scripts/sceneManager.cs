@@ -19,7 +19,7 @@ public class sceneManager : MonoBehaviour
 
     public void Credits()
     {
-        LoadScene(5);
+        LoadScene(0);
     }
 
     public void Quit()

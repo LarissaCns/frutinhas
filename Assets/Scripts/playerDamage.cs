@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
@@ -27,8 +28,12 @@ public class playerDamage : MonoBehaviour
     public Image[] livesImage;
     public GameObject livesArray;
 
+    private SpriteRenderer sprite;
+
     private void Awake()
     {
+        sprite = GetComponent<SpriteRenderer>();
+
         if (PlayerInput.GetPlayerByIndex(0).gameObject == gameObject)
         {
            spawnPoint = new Vector2(-4.06f, -2.978364f);
@@ -38,6 +43,9 @@ public class playerDamage : MonoBehaviour
             {
                 livesImage[i] = livesArray.transform.GetChild(i).GetComponent<Image>();
             }
+
+            sprite.sprite = Resources.Load<Sprite>("bananaIDLE1");
+
         }
         else if (PlayerInput.GetPlayerByIndex(1).gameObject == gameObject)
         {
@@ -48,6 +56,8 @@ public class playerDamage : MonoBehaviour
             {
                 livesImage[i] = livesArray.transform.GetChild(i).GetComponent<Image>();
             }
+
+            sprite.sprite = Resources.Load<Sprite>("limaoIDLE1");
         }
 
         transform.position = spawnPoint;
@@ -108,6 +118,18 @@ public class playerDamage : MonoBehaviour
     {
         livesImage[lives].enabled = false;
         lives--;
+
+        if(lives <= 0)
+        {
+            endGame.player1win = PlayerInput.GetPlayerByIndex(1).gameObject == gameObject;
+            StartCoroutine(LoadScene());
+        }
+    }
+
+    IEnumerator LoadScene()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        SceneManager.LoadScene(2);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -139,6 +161,7 @@ public class playerDamage : MonoBehaviour
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(2f);
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if(transform.childCount > 1)
         {
             Destroy(transform.GetChild(1).gameObject);

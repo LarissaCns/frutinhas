@@ -59,7 +59,7 @@ public class playerScript : MonoBehaviour
         }
         else if (rb.velocity.x < 0f)
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x * -1), transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * (-1), transform.localScale.y, transform.localScale.z);
         }
     }
 

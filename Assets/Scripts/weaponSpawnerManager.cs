@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class weaponSpawnerManager : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class weaponSpawnerManager : MonoBehaviour
             {
                 weaponsList.Remove(weaponsList[i]);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
