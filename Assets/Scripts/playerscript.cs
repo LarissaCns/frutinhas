@@ -59,7 +59,6 @@ public class playerScript : MonoBehaviour
         }
         else if (rb.velocity.x < 0f)
         {
-            transform.localScale = new Vector3(-0.7f, transform.localScale.y, transform.localScale.z);
         }
     }
 
