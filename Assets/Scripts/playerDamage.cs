@@ -24,7 +24,32 @@ public class playerDamage : MonoBehaviour
     [Header("Vidas")]
     private int lives = 4;
     [SerializeField]
-    private Image[] livesImage;
+    public Image[] livesImage;
+    public GameObject livesArray;
+
+    private void Start()
+    {
+        if (PlayerInput.GetPlayerByIndex(0).gameObject == gameObject)
+        {
+           spawnPoint = new Vector2(-4.06f, -2.978364f);
+           livesArray = GameObject.Find("LivesP1");
+           
+            for (int i = 0; i < livesArray.transform.childCount; i++)
+            {
+                livesImage[i] = livesArray.transform.GetChild(i).GetComponent<Image>();
+            }
+        }
+        else if (PlayerInput.GetPlayerByIndex(1).gameObject == gameObject)
+        {
+            livesArray = GameObject.Find("LivesP2");
+            spawnPoint = new Vector2(4.06f, -2.978364f);
+
+            for (int i = 0; i < livesArray.transform.childCount; i++)
+            {
+                livesImage[i] = livesArray.transform.GetChild(i).GetComponent<Image>();
+            }
+        }
+    }
 
     private void Update()
     {
@@ -47,7 +72,7 @@ public class playerDamage : MonoBehaviour
     {
         if (value.performed)
         {
-            if (weaponInfo.canPickWeapon && transform.childCount <= 1)
+            if (weaponInfo != null && weaponInfo.canPickWeapon && transform.childCount <= 1)
             {
                 weapon = weaponInfo.gameObject;
                 weapon.transform.GetComponent<Rigidbody2D>().isKinematic = true;
