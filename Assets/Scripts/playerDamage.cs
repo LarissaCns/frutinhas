@@ -27,7 +27,7 @@ public class playerDamage : MonoBehaviour
     public Image[] livesImage;
     public GameObject livesArray;
 
-    private void Start()
+    private void Awake()
     {
         if (PlayerInput.GetPlayerByIndex(0).gameObject == gameObject)
         {
@@ -49,6 +49,8 @@ public class playerDamage : MonoBehaviour
                 livesImage[i] = livesArray.transform.GetChild(i).GetComponent<Image>();
             }
         }
+
+        transform.position = spawnPoint;
     }
 
     private void Update()
@@ -88,6 +90,7 @@ public class playerDamage : MonoBehaviour
                 Rigidbody2D wpRB;
                 weapon = transform.GetChild(1).gameObject;
                 wpRB = weapon.transform.GetComponent<Rigidbody2D>();
+                weaponInfo.playerThrowed = gameObject;
                 weapon.transform.parent = null;
                 wpRB.isKinematic = false;
                 weapon.GetComponent<BoxCollider2D>().enabled = true;
@@ -121,6 +124,14 @@ public class playerDamage : MonoBehaviour
         if (collision.CompareTag("weapon"))
         {
             weaponInfo = collision.gameObject.GetComponent<weaponScript>();
+
+            if (weaponInfo.playerThrowed != gameObject)
+            {
+                if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.x != 0)
+                {
+                    LivesUI();
+                }
+            }
         }
     }
 

@@ -8,6 +8,8 @@ public class weaponScript : MonoBehaviour
     public bool canPickWeapon = false;
     private Rigidbody2D rb;
 
+    public GameObject playerThrowed; 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
