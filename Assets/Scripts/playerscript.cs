@@ -12,7 +12,6 @@ public class playerScript : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
-
     [Header("Pulo")]
     [SerializeField]
     [Range(0f, 100f)]
@@ -29,15 +28,6 @@ public class playerScript : MonoBehaviour
     private float coyoteTime = 0.2f;
     private float coyoteCounter = 0f;
 
-    private bool canDash = true; // posso dar o dash
-    private bool isDashing; // dash ativo
-    private float dashingPower = 24f; // força do dash
-    private float dashingTime = 0.2f; // tempo do dash
-    private float dashingCoolDown = 0.5f;
-
-    [SerializeField] TrailRenderer tr;
-
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -45,10 +35,6 @@ public class playerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(isDashing) {
-            return;
-        }
-
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
 
         if (rb.velocity.x > 0f)
@@ -63,14 +49,6 @@ public class playerScript : MonoBehaviour
 
     private void Update()
     {
-        if(isDashing) {
-            return;
-        }
-
-        if(Input.GetButtonDown("Fire2") && canDash) {
-            StartCoroutine(Dash());
-        }
-
         if (isGrounded())
         {
             coyoteCounter = coyoteTime;
@@ -81,23 +59,9 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    IEnumerator Dash() {
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale; // pegando o valor da gravidade 
-        rb.gravityScale = 0f; // desliga a gravidade
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        tr.emitting = true; // liga o rastro
-        yield return new WaitForSeconds(dashingTime); // espera um tempo
-        tr.emitting = false; // desliga o rastro
-        rb.gravityScale = originalGravity; // liga a gravidade novamente
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCoolDown); // tempo do dash
-        canDash = true;
-    }
     private bool isGrounded()
     {
-        if(Physics2D.OverlapBox(feet.position, feetSize, 0, groundLayer))
+        if (Physics2D.OverlapBox(feet.position, feetSize, 0, groundLayer))
         {
             jumpsRemaining = maxJumps;
             return true;
@@ -113,7 +77,7 @@ public class playerScript : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext value)
     {
-        if ((jumpsRemaining > 0 || coyoteCounter> 0f) && value.performed)
+        if ((jumpsRemaining > 0 || coyoteCounter > 0f) && value.performed)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpsRemaining--;
@@ -127,9 +91,9 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    /* private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(feet.position, feetSize);
-    } */
+    }*/
 }

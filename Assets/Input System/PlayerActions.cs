@@ -90,6 +90,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+<<<<<<< HEAD
                     ""name"": ""2D Vector"",
                     ""id"": ""931a7cbe-6df1-4e1f-90a4-0ebfa4032fb6"",
                     ""path"": ""2DVector"",
@@ -123,6 +124,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+=======
+>>>>>>> c5664f79e48f76da4729e871ba1fddcc2311e823
                     ""name"": """",
                     ""id"": ""ce74f85c-58e9-4cb7-b012-b26a495e43b0"",
                     ""path"": ""<Gamepad>/buttonSouth"",
@@ -135,6 +138,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+<<<<<<< HEAD
                     ""id"": ""3277ea54-bff9-4475-a06c-61b5e16281da"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -147,6 +151,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e0c5c622-1883-46f6-bf6f-ce23a37a35fe"",
+=======
+                    ""id"": ""1536f5fd-a579-4480-ada2-31ceaab0e4fa"",
+>>>>>>> c5664f79e48f76da4729e871ba1fddcc2311e823
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -154,6 +161,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+<<<<<<< HEAD
                 },
                 {
                     ""name"": """",
@@ -165,6 +173,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+=======
+>>>>>>> c5664f79e48f76da4729e871ba1fddcc2311e823
                 }
             ]
         }
